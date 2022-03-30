@@ -1,5 +1,6 @@
-from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.shortcuts import render , get_object_or_404
+# from django.http import HttpResponse, JsonResponse
+
 from .models import Articles
 import logging
 
@@ -16,9 +17,9 @@ def home(request):
 
 def detail(request, slug):
     context = {
-        "article": {
-            Articles.objects.get(slug=slug)
-        }
+        # "article":  Articles.objects.get(slug=slug)
+        "article" : get_object_or_404(Articles , slug=slug)
     }
-    logging.log(context)
     return render(request, "blog/detail.html", context)
+
+
